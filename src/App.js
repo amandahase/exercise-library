@@ -1,4 +1,3 @@
-import { stubFalse } from "lodash";
 import React, {useEffect, useState} from "react";
 import './App.css';
 // import SearchPanel from "./Components/SearchPanel"
@@ -57,7 +56,7 @@ function App() {
     if (Object.keys(selectedExercise).length !== 0) {
       setIsExerciseSelected(true)
     } else {
-      setIsExerciseSelected(stubFalse)
+      setIsExerciseSelected(false)
     }
   }, [selectedExercise])
 
@@ -108,13 +107,16 @@ function App() {
         {isExerciseSelected ?
           <section>
             <h1>{selectedExercise.name}</h1>
-            {/* <div></div> */}
             <p>{selectedExercise.description}</p>
             <iframe width="560" height="315" 
               src={selectedExercise.video_url}
               referrerPolicy="strict-origin-when-cross-origin"
-            >
-            </iframe>
+              title={`${selectedExercise.name} Video`}
+            />
+            <details>
+              <summary>More {selectedExercise.name} Details</summary>
+              <p>Here is the content!</p>
+            </details>
           </section>
         :
           <p>Select an exercise</p>
