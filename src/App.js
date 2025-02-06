@@ -72,54 +72,50 @@ function App() {
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
 
+// TODO NEXT: Use Axios to fetch actual list from API endpoint to replace static list
+// TODO NEXT: Add styles and layout for better UI and UX - className="App-header"
+
   return (
     <div className="App"> {/** This needs to be a grid layout */}
-      <header className="App-header">
-
-      </header>
-      <aside>
-        <label htmlFor="search_exercises">Search Exercises</label>
-        <input
-          type="text"
-          id="search_exercises"
-          name="search_exercises"
-          value={searchValue}
-          onChange={handleSearchFieldChange}
-        />
-        <ul>
+      <aside className="search-panel">
+        <div className="search-panel__search">
+          <label htmlFor="search_exercises" className="search-panel__label">Search Exercises</label>
+          <input
+            type="search"
+            id="search_exercises"
+            name="search_exercises"
+            value={searchValue}
+            onChange={handleSearchFieldChange}
+            className="search-panel__input"
+          />
+        </div>
+        <ul className="search-panel__list">
           {exerciseList.map((exercise) => (
-            <li key={exercise.id}>
-              <button onClick={() => handleExerciseSelection(exercise)}>{exercise.name}</button>
+            <li key={exercise.id} className="search-panel__list-item">
+              <button onClick={() => handleExerciseSelection(exercise)} className="search-panel__button">{exercise.name}</button>
             </li>
           ))}
         </ul>
       </aside>
-      <main>
-        {/* 
-          Right panel with details displayed
-
-          <h1></h1>
-          <div></div> --> requesite exercise level chip
-          <p></p>
-          <video></video>
-          either an daccordion or a modal popup for MORE DETAILS section
-        */}
+      <main className="details-panel">
         {isExerciseSelected ?
-          <section>
-            <h1>{selectedExercise.name}</h1>
-            <p>{selectedExercise.description}</p>
-            <iframe width="560" height="315" 
+          <section className="details-panel__section">
+            <h1 className="details-panel__title">{selectedExercise.name}</h1>
+            <div className="details-panel__level">Intermediate</div>
+            <p className="details-panel__description">{selectedExercise.description}</p>
+            <iframe
               src={selectedExercise.video_url}
               referrerPolicy="strict-origin-when-cross-origin"
               title={`${selectedExercise.name} Video`}
+              className="details-panel__video"
             />
-            <details>
-              <summary>More {selectedExercise.name} Details</summary>
-              <p>Here is the content!</p>
+            <details className="details-panel__accordion">
+              <summary className="details-panel__accordion-summary">More {selectedExercise.name} Details</summary>
+              <p className="details-panel__accordion-content">Here is the content!</p>
             </details>
           </section>
         :
-          <p>Select an exercise</p>
+          <p className="details-panel__empty-text">Select an exercise</p>
         }
       </main>
     </div>
