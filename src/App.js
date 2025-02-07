@@ -43,7 +43,6 @@ function App() {
       setIsExerciseSelected(false)
     }
   }, [selectedExercise])
-  // Every time the selected exercise changes, we need to call to the ML API to get the level that matches that exercise's id value
 
   const handleSearchFieldChange = (e) => {
     setSearchValue(e.target.value)
@@ -57,7 +56,6 @@ function App() {
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
 
-// TODO NEXT: Use Axios to fetch ML list from API endpoint
 // TODO NEXT: Add styles and layout for better UI and UX - className="App-header"
 
   return (

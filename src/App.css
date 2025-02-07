@@ -1,7 +1,9 @@
 .App {
-  margin: 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  background-color: #010703;
+  color: #FFF;
 }
 
 .search-panel__search {
@@ -9,6 +11,22 @@
   flex-direction: column;
   position: sticky;
   top: 0;
+  background-color: #010703;
+  color: #FFF;
+  padding: 10px 0;
+}
+
+.search-panel__label {
+  margin-bottom: 5px;
+}
+
+.search-panel__input {
+  padding: 10px 20px;
+  background-color: #010703;
+  color: #FFF;
+  border: 1px solid #FFEE5C;
+  border-radius: 20px;
+  font-size: 1rem;
 }
 
 .search-panel__list {
@@ -20,6 +38,17 @@
   width: 100%;
   padding: 5px 0;
   font-size: 1rem;
+  background-color: #010703;
+  color: #FFF;
+  border: none;
+  padding: 10px 0;
+}
+
+.search-panel__button:hover,
+.search-panel__button:active,
+.search-panel__button:focus {
+  background-color: #FFEE5C;
+  color: #010703;
 }
 
 .details-panel__video {
