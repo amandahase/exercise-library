@@ -4,9 +4,10 @@
   flex-direction: column;
   background-color: #010703;
   color: #FFF;
+  height: 100vh;
 }
 
-.search-panel__search {
+.mobile-dialog__search {
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -16,11 +17,11 @@
   padding: 10px 0;
 }
 
-.search-panel__label {
+.mobile-dialog__label {
   margin-bottom: 5px;
 }
 
-.search-panel__input {
+.mobile-dialog__input {
   padding: 10px 20px;
   background-color: #010703;
   color: #FFF;
@@ -29,12 +30,13 @@
   font-size: 1rem;
 }
 
-.search-panel__list {
+.mobile-dialog__list {
   list-style-type: none;
   padding: 0;
 }
 
-.search-panel__button {
+.search-panel__button,
+.mobile-dialog__button {
   width: 100%;
   padding: 5px 0;
   font-size: 1rem;
@@ -46,7 +48,10 @@
 
 .search-panel__button:hover,
 .search-panel__button:active,
-.search-panel__button:focus {
+.search-panel__button:focus,
+.mobile-dialog__button:hover,
+.mobile-dialog__button:active,
+.mobile-dialog__button:focus {
   background-color: #FFEE5C;
   color: #010703;
   text-decoration: underline;
@@ -55,6 +60,10 @@
 .search-panel__empty-list {
   font-size: 1rem;
   text-align: center;
+}
+
+.search-panel {
+  display: none;
 }
 
 .error-alert {
@@ -152,6 +161,14 @@
     flex-direction: row;
     margin: 0;
     height: 100%;
+  }
+
+  .mobile-dialog__button {
+    display: none;
+  }
+
+  .mobile-dialog {
+    display: none;
   }
 
   .search-panel {

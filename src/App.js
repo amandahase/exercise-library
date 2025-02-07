@@ -14,6 +14,7 @@ function App() {
   const [isExerciseSelected, setIsExerciseSelected] = useState(false)
   const [selectedExerciseLevel, setSelectedExerciseLevel] = useState(null)
   const [errorMessage, setErrorMessage] = useState("")
+  const [isMobileDialogOpen, setIsMobileDialogOpen] = useState(false)
 
   const getExerciseList = () => {
     axios.get('https://candidate.staging.future.co/sandbox/api/exercises')
@@ -59,6 +60,7 @@ function App() {
 
   const handleExerciseSelection = (exercise) => {
     setSelectedExercise(exercise)
+    setIsMobileDialogOpen(false)
   }
 
   const displaySideInfo = () => {
@@ -88,13 +90,36 @@ function App() {
     }
   }
 
+  const handleOpenMobileSearch = () => {
+    setIsMobileDialogOpen(true)
+  }
+
 // We either want to do a component for each whole panel and break it down further inside those for the different parts
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
 
   return (
     <div className="App">
-      <aside className="search-panel">
+      <button className="mobile-dialog__button" onClick={handleOpenMobileSearch}>Find an Exercise</button>
+      <dialog className="mobile-dialog" open={isMobileDialogOpen}>
+        <nav className="mobile-dialog__menu">
+          <div className="mobile-dialog__search">
+            <label htmlFor="search_exercises" className="mobile-dialog__label">Search Exercises</label>
+            <input
+              type="search"
+              id="search_exercises"
+              name="search_exercises"
+              value={searchValue}
+              onChange={handleSearchFieldChange}
+              className="mobile-dialog__input"
+            />
+          </div>
+          <ul className="mobile-dialog__list">
+            {displayExerciseListItems()}
+          </ul>
+        </nav>
+      </dialog>
+      <nav className="search-panel">
         <div className="search-panel__search">
           <label htmlFor="search_exercises" className="search-panel__label">Search Exercises</label>
           <input
@@ -109,7 +134,7 @@ function App() {
         <ul className="search-panel__list">
           {displayExerciseListItems()}
         </ul>
-      </aside>
+      </nav>
       <main className="details-panel">
         {errorMessage.length > 0 &&
           <div className="error-alert">Error: {errorMessage}</div>
