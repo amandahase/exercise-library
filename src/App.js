@@ -96,31 +96,33 @@ function App() {
             <details className="details-panel__accordion">
               <summary className="details-panel__accordion-summary">More {selectedExercise.name} Details</summary>
               <div className="details-panel__accordion-content">
-                {selectedExercise.muscle_groups &&
-                  <p>Muscle Groups: {selectedExercise.muscle_groups}</p>
-                }
-                {selectedExercise.equipment_required &&
-                  <p>Equipment Required: {selectedExercise.equipment_required}</p>
-                }
-                {selectedExercise.movement_patterns &&
-                  <p>Movement Patterns: {selectedExercise.movement_patterns}</p>
-                }
-                {selectedExercise.synonyms &&
-                  <p>Synonyms: {selectedExercise.synonyms}</p>
-                }
-                {selectedExercise.side &&
-                  <p>Side: {selectedExercise.side}</p> // right_side show right or left chip instead of value
-                }
-                {selectedExercise.is_alternating && // true/false, so show a chip or something here instead of value
-                  <p>Is Alternating: {selectedExercise.is_alternating}</p>
-                }
-                {selectedExercise.audio &&
-                  <audio controls src={selectedExercise.audio.url}>
-                    <source src={selectedExercise.audio.url} type="audio/m4a" />
-                    <source src={selectedExercise.audio.url} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                }
+                <div className="details-panel__accordion-content-wrap">
+                  {selectedExercise.muscle_groups &&
+                    <p>Muscle Groups: {selectedExercise.muscle_groups}</p>
+                  }
+                  {selectedExercise.equipment_required &&
+                    <p>Equipment Required: {selectedExercise.equipment_required}</p>
+                  }
+                  {selectedExercise.movement_patterns &&
+                    <p>Movement Patterns: {selectedExercise.movement_patterns}</p>
+                  }
+                  {selectedExercise.synonyms &&
+                    <p>Synonyms: {selectedExercise.synonyms}</p>
+                  }
+                  {selectedExercise.side &&
+                    <p>Side: {selectedExercise.side}</p> // right_side show right or left chip instead of value
+                  }
+                  {selectedExercise.is_alternating && // true/false, so show a chip or something here instead of value
+                    <p>Is Alternating: {selectedExercise.is_alternating}</p>
+                  }
+                  {selectedExercise.audio &&
+                    <audio controls src={selectedExercise.audio.url}>
+                      <source src={selectedExercise.audio.url} type="audio/m4a" />
+                      <source src={selectedExercise.audio.url} type="audio/mpeg" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  }
+                </div>
               </div>
             </details>
           </section>

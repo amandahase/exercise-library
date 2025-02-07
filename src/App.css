@@ -57,11 +57,12 @@
 }
 
 .details-panel__level {
-  background-color: yellow;
+  background-color: #FFEE5C;
   border-radius: 10px;
   padding: 5px 10px;
   width: fit-content;
-  font-size: 0.875rem; 
+  font-size: 0.875rem;
+  color: #010703;
 }
 
 .details-panel__title {
@@ -74,8 +75,26 @@
 
 .details-panel__accordion {
   width: 100%;
+  background-color: #FFEE5C;
+  color: #010703;
+  padding-bottom: 5px;
+  border-radius: 10px;
 }
 
-.details-panel__accordion-summary::marker {
-  padding-right: 5px;
+.details-panel__accordion-summary {
+  list-style-position: outside;
+  margin-left: 30px;
+  padding: 10px 10px 10px 20px;
+  border-radius: 10px;
+}
+
+.details-panel__accordion-content {
+  background-color: #010703;
+  color: #FFF;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.details-panel__accordion-content-wrap {
+  padding: 10px;
 }
