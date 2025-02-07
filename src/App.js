@@ -1,40 +1,12 @@
 import React, {useEffect, useState} from "react";
 import './App.css';
+
+import axios from 'axios';
+
 // import SearchPanel from "./Components/SearchPanel"
 // import DetailsPanel from "./Components/DetailsPanel"
-
-const exercises = [
-  {
-    id: 1,
-    name: "Bench Press",
-    description: "Upper body lift that can be done with a barbell or dumbells.",
-    video_url: "https://www.youtube.com/embed/SCVCLChPQFY?si=w3Abwp3pplVyptqp"
-  },
-  {
-    id: 2,
-    name: "Back Squat",
-    description: "Lower body lift that is done with a barbell.",
-    video_url: "https://www.youtube.com/embed/QmZAiBqPvZw?si=nddq-dAKSZs6KW1o"
-  },
-  {
-    id: 3,
-    name: "Front Squat",
-    description: "Lower body lift that is done with a barbell.",
-    video_url: "https://www.youtube.com/embed/uYumuL_G_V0?si=O5SOBFnMTVn8W-Cm"
-  },
-  {
-    id: 4,
-    name: "Deadlift",
-    description: "Lower body exercise that can be done with a barbell, kettlebells, or dumbells.",
-    video_url: "https://www.youtube.com/embed/1ZXobu7JvvE?si=wQi8221_ug3ooqna"
-  },
-  {
-    id: 5,
-    name: "Push Press",
-    description: "Upper body exercise that can be done with a barbell, kettlebells, or dumbells.",
-    video_url: "https://www.youtube.com/embed/iaBVSJm78ko?si=AK_VLJClGtBbMxS0"
-  },
-]
+// https://candidate.staging.future.co/sandbox/api/exercises
+// https://candidate.staging.future.co/sandbox/api/exercises/:excercise_id/predictions - ML
 
 function App() {
   const [exerciseList, setExerciseList] = useState([])
@@ -42,15 +14,17 @@ function App() {
   const [selectedExercise, setSelectedExercise] = useState({})
   const [isExerciseSelected, setIsExerciseSelected] = useState(false)
 
+  const getExerciseList = () => {
+    axios.get('https://candidate.staging.future.co/sandbox/api/exercises').then((exercises) => {
+      setExerciseList(exercises.data)
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
   useEffect(() => {
-    setExerciseList(exercises)
+    getExerciseList()
   }, [])
-
-  useEffect(() => {
-    const filteredExerciseList = exercises.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "")
-
-    setExerciseList(filteredExerciseList)
-  }, [searchValue])
 
   useEffect(() => {
     if (Object.keys(selectedExercise).length !== 0) {
@@ -72,7 +46,7 @@ function App() {
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
 
-// TODO NEXT: Use Axios to fetch actual list from API endpoint to replace static list
+// TODO NEXT: Use Axios to fetch ML list from API endpoint
 // TODO NEXT: Add styles and layout for better UI and UX - className="App-header"
 
   return (
@@ -90,7 +64,8 @@ function App() {
           />
         </div>
         <ul className="search-panel__list">
-          {exerciseList.map((exercise) => (
+          {/* TODO: Is there a way to make this better??? */}
+          {exerciseList.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "").map((exercise) => (
             <li key={exercise.id} className="search-panel__list-item">
               <button onClick={() => handleExerciseSelection(exercise)} className="search-panel__button">{exercise.name}</button>
             </li>
