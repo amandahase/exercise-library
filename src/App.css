@@ -49,6 +49,16 @@
 .search-panel__button:focus {
   background-color: #FFEE5C;
   color: #010703;
+  text-decoration: underline;
+}
+
+.error-alert {
+  background-color: #FFEE5C;
+  color: #010703;
+  font-size: 1rem;
+  width: fit-content;
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
 .details-panel__video-wrap {
@@ -117,6 +127,10 @@
   font-weight: 700;
 }
 
+.details-panel__empty-text {
+  font-size: 1rem;
+}
+
 @media screen and (min-width: 1024px) {
   html,
   body,
@@ -139,6 +153,7 @@
     width: 20%;
     overflow-y: auto;
     height: 100%;
+    padding-right: 15px;
   }
 
   .search-panel__list {
@@ -158,5 +173,9 @@
 
   .details-panel__accordion {
     margin-bottom: 50px;
+  }
+
+  .details-panel__empty-text {
+    font-size: 1.5rem;
   }
 }

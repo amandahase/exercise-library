@@ -12,20 +12,23 @@ function App() {
   const [selectedExercise, setSelectedExercise] = useState({})
   const [isExerciseSelected, setIsExerciseSelected] = useState(false)
   const [selectedExerciseLevel, setSelectedExerciseLevel] = useState(null)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const getExerciseList = () => {
-    axios.get('https://candidate.staging.future.co/sandbox/api/exercises').then((exercises) => {
+    axios.get('https://candidate.staging.future.co/sandbox/api/exercises')
+    .then((exercises) => {
       setExerciseList(exercises.data)
-    }).catch((e) => {
-      console.log(e) // Add an error handling solution for this
+    }).catch(() => {
+      setErrorMessage("Oops!  We had trouble fetching the list of exercises.")
     })
   }
 
   const getExerciseLevel = () => {
-    axios.get(`https://candidate.staging.future.co/sandbox/api/exercises/${selectedExercise.id}/predictions`).then((prediction) => {
+    axios.get(`https://candidate.staging.future.co/sandbox/api/exercises/${selectedExercise.id}/predictions`)
+    .then((prediction) => {
       setSelectedExerciseLevel(prediction.data.skill_level.level)
-    }).catch((e) => {
-      console.log(e) // Add an error handling solution for this
+    }).catch(() => {
+      setErrorMessage("Oops!  We had trouble fetching the predicted level for this exercise.")
     })
   }
 
@@ -83,7 +86,7 @@ function App() {
           />
         </div>
         <ul className="search-panel__list">
-          {/* TODO: Is there a way to make this better??? */}
+          {/* TODO: Is there a way to make this better??? Can we add text for if list is empty?? */}
           {exerciseList.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "").map((exercise) => (
             <li key={exercise.id} className="search-panel__list-item">
               <button onClick={() => handleExerciseSelection(exercise)} className="search-panel__button">{exercise.name}</button>
@@ -92,6 +95,9 @@ function App() {
         </ul>
       </aside>
       <main className="details-panel">
+        {errorMessage.length > 0 &&
+          <div className="error-alert">Error: {errorMessage}</div>
+        }
         {isExerciseSelected ?
           <section className="details-panel__section">
             <h1 className="details-panel__title">{selectedExercise.name}</h1>
@@ -106,7 +112,7 @@ function App() {
               />
             </div>
             <details className="details-panel__accordion">
-              <summary className="details-panel__accordion-summary">More {selectedExercise.name} Details</summary>
+              <summary className="details-panel__accordion-summary">More Details for {selectedExercise.name}</summary>
               <div className="details-panel__accordion-content">
                 <div className="details-panel__accordion-content-wrap">
                   {selectedExercise.muscle_groups &&
