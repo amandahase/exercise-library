@@ -52,6 +52,11 @@
   text-decoration: underline;
 }
 
+.search-panel__empty-list {
+  font-size: 1rem;
+  text-align: center;
+}
+
 .error-alert {
   background-color: #FFEE5C;
   color: #010703;

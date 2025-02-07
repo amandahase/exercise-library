@@ -7,7 +7,8 @@ import axios from 'axios';
 // import DetailsPanel from "./Components/DetailsPanel"
 
 function App() {
-  const [exerciseList, setExerciseList] = useState([])
+  const [fullExerciseList, setFullExerciseList] = useState([])
+  const [filteredExerciseList, setFilteredExerciseList] = useState([])
   const [searchValue, setSearchValue] = useState("")
   const [selectedExercise, setSelectedExercise] = useState({})
   const [isExerciseSelected, setIsExerciseSelected] = useState(false)
@@ -17,7 +18,8 @@ function App() {
   const getExerciseList = () => {
     axios.get('https://candidate.staging.future.co/sandbox/api/exercises')
     .then((exercises) => {
-      setExerciseList(exercises.data)
+      setFullExerciseList(exercises.data)
+      setFilteredExerciseList(exercises.data)
     }).catch(() => {
       setErrorMessage("Oops!  We had trouble fetching the list of exercises.")
     })
@@ -45,6 +47,12 @@ function App() {
     }
   }, [selectedExercise])
 
+  useEffect(() => {
+    const searchedList = fullExerciseList.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "")
+
+    setFilteredExerciseList(searchedList)
+  }, [searchValue])
+
   const handleSearchFieldChange = (e) => {
     setSearchValue(e.target.value)
   }
@@ -65,11 +73,24 @@ function App() {
     return selectedExercise.is_alternating === true ? "Yes" : "No"
   }
 
+  const displayExerciseListItems = () => {
+    if (filteredExerciseList.length > 0) {
+      return (
+        filteredExerciseList.map((exercise) => (
+          <li key={exercise.id} className="search-panel__list-item">
+            <button onClick={() => handleExerciseSelection(exercise)} className="search-panel__button">{exercise.name}</button>
+          </li>
+        )))
+    } else {
+      return (
+        <p className="search-panel__empty-list">No exercise matches</p>
+      )
+    }
+  }
+
 // We either want to do a component for each whole panel and break it down further inside those for the different parts
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
-
-// TODO NEXT: Add styles and layout for better UI and UX - className="App-header"
 
   return (
     <div className="App">
@@ -86,12 +107,7 @@ function App() {
           />
         </div>
         <ul className="search-panel__list">
-          {/* TODO: Is there a way to make this better??? Can we add text for if list is empty?? */}
-          {exerciseList.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "").map((exercise) => (
-            <li key={exercise.id} className="search-panel__list-item">
-              <button onClick={() => handleExerciseSelection(exercise)} className="search-panel__button">{exercise.name}</button>
-            </li>
-          ))}
+          {displayExerciseListItems()}
         </ul>
       </aside>
       <main className="details-panel">
