@@ -5,8 +5,6 @@ import axios from 'axios';
 
 // import SearchPanel from "./Components/SearchPanel"
 // import DetailsPanel from "./Components/DetailsPanel"
-// https://candidate.staging.future.co/sandbox/api/exercises
-// https://candidate.staging.future.co/sandbox/api/exercises/:excercise_id/predictions - ML
 
 function App() {
   const [exerciseList, setExerciseList] = useState([])
@@ -87,27 +85,29 @@ function App() {
             <h1 className="details-panel__title">{selectedExercise.name}</h1>
             <div className="details-panel__level">{`Level ${selectedExerciseLevel}`}</div>
             <p className="details-panel__description">{selectedExercise.description}</p>
-            <iframe
-              src={selectedExercise.video.url}
-              referrerPolicy="strict-origin-when-cross-origin"
-              title={`${selectedExercise.name} Video`}
-              className="details-panel__video"
-            />
+            <div className="details-panel__video-wrap">
+              <iframe
+                src={selectedExercise.video.url}
+                referrerPolicy="strict-origin-when-cross-origin"
+                title={`${selectedExercise.name} Video`}
+                className="details-panel__video"
+              />
+            </div>
             <details className="details-panel__accordion">
               <summary className="details-panel__accordion-summary">More {selectedExercise.name} Details</summary>
               <div className="details-panel__accordion-content">
                 <div className="details-panel__accordion-content-wrap">
                   {selectedExercise.muscle_groups &&
-                    <p>Muscle Groups: {selectedExercise.muscle_groups}</p>
+                    <p><span className="details-panel__bold-text">Muscle Groups:</span> {selectedExercise.muscle_groups}</p>
                   }
                   {selectedExercise.equipment_required &&
-                    <p>Equipment Required: {selectedExercise.equipment_required}</p>
+                    <p><span className="details-panel__bold-text">Equipment Required:</span> {selectedExercise.equipment_required}</p>
                   }
                   {selectedExercise.movement_patterns &&
-                    <p>Movement Patterns: {selectedExercise.movement_patterns}</p>
+                    <p><span className="details-panel__bold-text">Movement Patterns:</span> {selectedExercise.movement_patterns}</p>
                   }
                   {selectedExercise.synonyms &&
-                    <p>Synonyms: {selectedExercise.synonyms}</p>
+                    <p><span className="details-panel__bold-text">Synonyms:</span> {selectedExercise.synonyms}</p>
                   }
                   {selectedExercise.side &&
                     <p>Side: {selectedExercise.side}</p> // right_side show right or left chip instead of value
