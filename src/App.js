@@ -13,10 +13,19 @@ function App() {
   const [searchValue, setSearchValue] = useState("")
   const [selectedExercise, setSelectedExercise] = useState({})
   const [isExerciseSelected, setIsExerciseSelected] = useState(false)
+  const [selectedExerciseLevel, setSelectedExerciseLevel] = useState(null)
 
   const getExerciseList = () => {
     axios.get('https://candidate.staging.future.co/sandbox/api/exercises').then((exercises) => {
       setExerciseList(exercises.data)
+    }).catch((e) => {
+      console.log(e) // Add an error handling solution for this
+    })
+  }
+
+  const getExerciseLevel = () => {
+    axios.get(`https://candidate.staging.future.co/sandbox/api/exercises/${selectedExercise.id}/predictions`).then((prediction) => {
+      setSelectedExerciseLevel(prediction.data.skill_level.level)
     }).catch((e) => {
       console.log(e) // Add an error handling solution for this
     })
@@ -28,6 +37,7 @@ function App() {
 
   useEffect(() => {
     if (Object.keys(selectedExercise).length !== 0) {
+      getExerciseLevel()
       setIsExerciseSelected(true)
     } else {
       setIsExerciseSelected(false)
@@ -53,7 +63,7 @@ function App() {
   return (
     <div className="App">
       <aside className="search-panel">
-        <div className="search-panel__search"> {/* TODO: make this part of the panel sticky to the top */}
+        <div className="search-panel__search">
           <label htmlFor="search_exercises" className="search-panel__label">Search Exercises</label>
           <input
             type="search"
@@ -77,7 +87,7 @@ function App() {
         {isExerciseSelected ?
           <section className="details-panel__section">
             <h1 className="details-panel__title">{selectedExercise.name}</h1>
-            <div className="details-panel__level">Intermediate</div>
+            <div className="details-panel__level">{`Level ${selectedExerciseLevel}`}</div>
             <p className="details-panel__description">{selectedExercise.description}</p>
             <iframe
               src={selectedExercise.video.url}

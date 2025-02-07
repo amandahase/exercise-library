@@ -7,6 +7,8 @@
 .search-panel__search {
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
 }
 
 .search-panel__list {
@@ -29,7 +31,7 @@
   background-color: yellow;
   border-radius: 10px;
   padding: 5px 10px;
-  width: min-content;
+  width: fit-content;
   font-size: 0.875rem; 
 }
 
