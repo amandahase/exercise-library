@@ -50,6 +50,18 @@ function App() {
     setSelectedExercise(exercise)
   }
 
+  const displaySideInfo = () => {
+    const removeUnderscore = selectedExercise.side.split("_")
+
+    const capitalizeAndAddSpace = removeUnderscore.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(" ")
+
+    return capitalizeAndAddSpace
+  }
+
+  const displayIsAlternatingInfo = () => {
+    return selectedExercise.is_alternating === true ? "Yes" : "No"
+  }
+
 // We either want to do a component for each whole panel and break it down further inside those for the different parts
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
@@ -110,10 +122,10 @@ function App() {
                     <p><span className="details-panel__bold-text">Synonyms:</span> {selectedExercise.synonyms}</p>
                   }
                   {selectedExercise.side &&
-                    <p>Side: {selectedExercise.side}</p> // right_side show right or left chip instead of value
+                    <p><span className="details-panel__bold-text">Side:</span> {displaySideInfo()}</p>
                   }
-                  {selectedExercise.is_alternating && // true/false, so show a chip or something here instead of value
-                    <p>Is Alternating: {selectedExercise.is_alternating}</p>
+                  {selectedExercise.is_alternating &&
+                    <p><span className="details-panel__bold-text">Is Alternating:</span> {displayIsAlternatingInfo()}</p>
                   }
                   {selectedExercise.audio &&
                     <audio controls src={selectedExercise.audio.url}>

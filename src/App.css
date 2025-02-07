@@ -56,6 +56,7 @@
   overflow: hidden;
   width: 100%;
   padding-top: 56.25%;
+  margin: 20px 0;
 }
 
 .details-panel__video {
@@ -149,6 +150,10 @@
     height: 100%;
     padding: 0 20px 20px 20px;
     overflow-y: auto;
+  }
+
+  .details-panel__video-wrap {
+    margin: 30px 0;
   }
 
   .details-panel__accordion {
