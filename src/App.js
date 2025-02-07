@@ -18,7 +18,7 @@ function App() {
     axios.get('https://candidate.staging.future.co/sandbox/api/exercises').then((exercises) => {
       setExerciseList(exercises.data)
     }).catch((e) => {
-      console.log(e)
+      console.log(e) // Add an error handling solution for this
     })
   }
 
@@ -33,6 +33,7 @@ function App() {
       setIsExerciseSelected(false)
     }
   }, [selectedExercise])
+  // Every time the selected exercise changes, we need to call to the ML API to get the level that matches that exercise's id value
 
   const handleSearchFieldChange = (e) => {
     setSearchValue(e.target.value)
@@ -50,9 +51,9 @@ function App() {
 // TODO NEXT: Add styles and layout for better UI and UX - className="App-header"
 
   return (
-    <div className="App"> {/** This needs to be a grid layout */}
+    <div className="App">
       <aside className="search-panel">
-        <div className="search-panel__search">
+        <div className="search-panel__search"> {/* TODO: make this part of the panel sticky to the top */}
           <label htmlFor="search_exercises" className="search-panel__label">Search Exercises</label>
           <input
             type="search"
@@ -79,14 +80,40 @@ function App() {
             <div className="details-panel__level">Intermediate</div>
             <p className="details-panel__description">{selectedExercise.description}</p>
             <iframe
-              src={selectedExercise.video_url}
+              src={selectedExercise.video.url}
               referrerPolicy="strict-origin-when-cross-origin"
               title={`${selectedExercise.name} Video`}
               className="details-panel__video"
             />
             <details className="details-panel__accordion">
               <summary className="details-panel__accordion-summary">More {selectedExercise.name} Details</summary>
-              <p className="details-panel__accordion-content">Here is the content!</p>
+              <div className="details-panel__accordion-content">
+                {selectedExercise.muscle_groups &&
+                  <p>Muscle Groups: {selectedExercise.muscle_groups}</p>
+                }
+                {selectedExercise.equipment_required &&
+                  <p>Equipment Required: {selectedExercise.equipment_required}</p>
+                }
+                {selectedExercise.movement_patterns &&
+                  <p>Movement Patterns: {selectedExercise.movement_patterns}</p>
+                }
+                {selectedExercise.synonyms &&
+                  <p>Synonyms: {selectedExercise.synonyms}</p>
+                }
+                {selectedExercise.side &&
+                  <p>Side: {selectedExercise.side}</p> // right_side show right or left chip instead of value
+                }
+                {selectedExercise.is_alternating && // true/false, so show a chip or something here instead of value
+                  <p>Is Alternating: {selectedExercise.is_alternating}</p>
+                }
+                {selectedExercise.audio &&
+                  <audio controls src={selectedExercise.audio.url}>
+                    <source src={selectedExercise.audio.url} type="audio/m4a" />
+                    <source src={selectedExercise.audio.url} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                }
+              </div>
             </details>
           </section>
         :
