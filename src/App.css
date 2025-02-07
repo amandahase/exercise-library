@@ -115,3 +115,43 @@
 .details-panel__bold-text {
   font-weight: 700;
 }
+
+@media screen and (min-width: 1024px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+      margin: 0;
+      overflow: hidden;
+  }
+
+  .App {
+    flex-direction: row;
+    margin: 0;
+    height: 100%;
+  }
+
+  .search-panel {
+    width: 20%;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .search-panel__list {
+    padding: 0 0 20px 0;
+  }
+
+  .details-panel {
+    width: 80%;
+    height: 100%;
+    padding: 0 20px 20px 20px;
+    overflow-y: auto;
+  }
+
+  .details-panel__accordion {
+    margin-bottom: 50px;
+  }
+}
