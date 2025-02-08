@@ -212,6 +212,15 @@
   font-size: 1rem;
 }
 
+.details-panel__flipped-video {
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+}
+
 @media screen and (min-width: 1024px) {
   html,
   body,

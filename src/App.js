@@ -112,7 +112,6 @@ function App() {
 // Change css to scss
 // make sure css is cleaned up and only what's needed
 // /([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])\1+/g - str.replace(regex) - double punctuation
-// video.is_flipped?
 
   return (
     <div className="App">
@@ -168,7 +167,7 @@ function App() {
                 src={selectedExercise.video.url}
                 referrerPolicy="strict-origin-when-cross-origin"
                 title={`${selectedExercise.name} Video`}
-                className="details-panel__video"
+                className={`${selectedExercise.video.is_flipped ? "details-panel__flipped-video" : ""} details-panel__video`}
               />
             </div>
             <details className="details-panel__accordion">
