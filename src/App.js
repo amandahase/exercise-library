@@ -6,6 +6,7 @@ import axios from 'axios';
 // import SearchPanel from "./Components/SearchPanel"
 // import DetailsPanel from "./Components/DetailsPanel"
 import TextDetails from "./Components/TextDetails"
+import SearchInput from "./Components/SearchInput"
 
 function App() {
   const [fullExerciseList, setFullExerciseList] = useState([])
@@ -119,14 +120,11 @@ function App() {
             <div className="mobile-dialog__close-wrap">
               <button className="mobile-dialog__close" onClick={handleToggleMobileSearch}><span className="sr-only">Close</span></button>
             </div>
-            <label htmlFor="search_exercises" className="mobile-dialog__label">Search Exercises</label>
-            <input
-              type="search"
+            <SearchInput
               id="search_exercises"
-              name="search_exercises"
+              label="Search Exercises"
               value={searchValue}
               onChange={handleSearchFieldChange}
-              className="mobile-dialog__input"
             />
           </div>
           <ul className="mobile-dialog__list">
@@ -136,14 +134,11 @@ function App() {
       </dialog>
       <nav className="search-panel">
         <div className="search-panel__search">
-          <label htmlFor="search_exercises" className="search-panel__label">Search Exercises</label>
-          <input
-            type="search"
+          <SearchInput
             id="search_exercises"
-            name="search_exercises"
+            label="Search Exercises"
             value={searchValue}
             onChange={handleSearchFieldChange}
-            className="search-panel__input"
           />
         </div>
         <ul className="search-panel__list">

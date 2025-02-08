@@ -1,0 +1,16 @@
+@import '../Variables.scss';
+
+.search-panel {
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    background-color: $black;
+    border: 1px solid $yellow;
+    border-radius: $borderRadius;
+    color: $white;
+    font-size: $text;
+    padding: 10px 20px;
+  }
+}
