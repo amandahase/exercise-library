@@ -26,6 +26,7 @@
   height: 90%;
   overflow: auto;
   padding: 0 10px 10px 10px;
+  border-radius: 10px;
 }
 
 .mobile-dialog__close-wrap {
@@ -38,6 +39,12 @@
   padding: 10px;
   background-color: #010703;
   border: none;
+}
+
+.mobile-dialog__close:hover,
+.mobile-dialog__close:focus,
+.mobile-dialog__close:active {
+  cursor: pointer;
 }
 
 .mobile-dialog__close::before,
@@ -80,7 +87,7 @@
   background-color: #010703;
   color: #FFF;
   border: 1px solid #FFEE5C;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 1rem;
 }
 
@@ -109,6 +116,8 @@
   background-color: #FFEE5C;
   color: #010703;
   text-decoration: underline;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .search-panel__empty-list {
@@ -171,6 +180,10 @@
   color: #010703;
   padding-bottom: 5px;
   border-radius: 10px;
+}
+
+.details-panel__accordion-summary:hover {
+  cursor: pointer;
 }
 
 .details-panel__accordion-summary {
