@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // import SearchPanel from "./Components/SearchPanel"
 // import DetailsPanel from "./Components/DetailsPanel"
+import TextDetails from "./Components/TextDetails"
 
 function App() {
   const [fullExerciseList, setFullExerciseList] = useState([])
@@ -100,8 +101,6 @@ function App() {
   }
 
   const removeDoublePunctuation = () => {
-    // const regex = "/[,],+/g" str.replace(/Welcome/gi, 'Hello')
-  
     return selectedExercise.description.replace(/\.\.+/g, '.').replace(/\,\,+/g, ',')
   }
 
@@ -110,7 +109,6 @@ function App() {
 // like the video, search input, list, accordion/modal, chip, etc.
 
 // Add separate components
-// /([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])\1+/g - str.replace(regex) - double punctuation
 
   return (
     <div className="App">
@@ -173,22 +171,40 @@ function App() {
               <div className="details-panel__accordion-content">
                 <div className="details-panel__accordion-content-wrap">
                   {selectedExercise.muscle_groups &&
-                    <p><span className="details-panel__bold-text">Muscle Groups:</span> {addSpaceAfterComma(selectedExercise.muscle_groups)}</p>
+                    <TextDetails 
+                      category="Muscle Groups"
+                      value={addSpaceAfterComma(selectedExercise.muscle_groups)}
+                    />
                   }
                   {selectedExercise.equipment_required &&
-                    <p><span className="details-panel__bold-text">Equipment Required:</span> {addSpaceAfterComma(selectedExercise.equipment_required)}</p>
+                    <TextDetails 
+                      category="Equipment Required"
+                      value={addSpaceAfterComma(selectedExercise.equipment_required)}
+                    />
                   }
                   {selectedExercise.movement_patterns &&
-                    <p><span className="details-panel__bold-text">Movement Patterns:</span> {addSpaceAfterComma(selectedExercise.movement_patterns)}</p>
+                    <TextDetails 
+                      category="Movement Patterns"
+                      value={addSpaceAfterComma(selectedExercise.movement_patterns)}
+                    />
                   }
                   {selectedExercise.synonyms &&
-                    <p><span className="details-panel__bold-text">Synonyms:</span> {selectedExercise.synonyms}</p>
+                    <TextDetails 
+                      category="Synonyms"
+                      value={addSpaceAfterComma(selectedExercise.synonyms)}
+                    />
                   }
                   {selectedExercise.side &&
-                    <p><span className="details-panel__bold-text">Side:</span> {displaySideInfo()}</p>
+                    <TextDetails 
+                      category="Side"
+                      value={displaySideInfo()}
+                    />
                   }
                   {selectedExercise.is_alternating &&
-                    <p><span className="details-panel__bold-text">Is Alternating:</span> {displayIsAlternatingInfo()}</p>
+                    <TextDetails 
+                      category="Is Alternating"
+                      value={displayIsAlternatingInfo()}
+                    />
                   }
                   {selectedExercise.audio &&
                     <audio controls src={selectedExercise.audio.url}>
