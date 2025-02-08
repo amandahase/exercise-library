@@ -16,5 +16,7 @@ This single page app (SPA) allows users to search through a list of exercises, s
 
 ## How to Run App Locally
 
-1. Run `npm install` to install all dependencies
-2. Run `npm start` to run the app in development mode inside your browser ([http://localhost:3000](http://localhost:3000))
+1. Clone the repo to your computer
+2. Go into the project directory
+3. Run `npm install` to install all dependencies
+4. Run `npm start` to run the app in development mode inside your browser ([http://localhost:3000](http://localhost:3000))
