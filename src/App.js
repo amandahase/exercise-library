@@ -21,7 +21,6 @@ function App() {
     .then((exercises) => {
       setFullExerciseList(exercises.data)
       setFilteredExerciseList(exercises.data)
-      console.log(exercises.data)
     }).catch(() => {
       setErrorMessage("Oops!  We had trouble fetching the list of exercises.")
     })
