@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './App.scss';
-
 import axios from 'axios';
 
-// import SearchPanel from "./Components/SearchPanel"
-// import DetailsPanel from "./Components/DetailsPanel"
 import TextDetails from "./Components/TextDetails"
 import SearchInput from "./Components/SearchInput"
 import Button from "./Components/Button"
@@ -67,9 +64,8 @@ function App() {
     setIsMobileDialogOpen(false)
   }
 
-  const displaySideInfo = () => {
-    const removeUnderscore = selectedExercise.side.split("_")
-
+  const removeSnakeCase = (text) => {
+    const removeUnderscore = text.split("_")
     const capitalizeAndAddSpace = removeUnderscore.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(" ")
 
     return capitalizeAndAddSpace
@@ -109,12 +105,6 @@ function App() {
   const removeDoublePunctuation = () => {
     return selectedExercise.description.replace(/\.\.+/g, '.').replace(/\,\,+/g, ',')
   }
-
-// We either want to do a component for each whole panel and break it down further inside those for the different parts
-// OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
-// like the video, search input, list, accordion/modal, chip, etc.
-
-// Add separate components
 
   return (
     <div className="App">
@@ -201,7 +191,7 @@ function App() {
                   {selectedExercise.side &&
                     <TextDetails 
                       category="Side"
-                      value={displaySideInfo()}
+                      value={removeSnakeCase(selectedExercise.side)}
                     />
                   }
                   {selectedExercise.is_alternating &&

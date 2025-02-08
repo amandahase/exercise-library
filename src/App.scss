@@ -79,41 +79,9 @@
     top: 0;
   }
 
-  // &__label {
-  //   margin-bottom: 5px;
-  // }
-
-  // &__input {
-  //   background-color: $black;
-  //   border: 1px solid $yellow;
-  //   border-radius: $borderRadius;
-  //   color: $white;
-  //   font-size: $text;
-  //   padding: 10px 20px;
-  // }
-
   &__list {
     list-style-type: none;
     padding: 0;
-  }
-
-  &__button {
-    background-color: $black;
-    border: none;
-    color: $white;
-    font-size: $text;
-    padding: 10px 0;
-    width: 100%;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: $yellow;
-      border-radius: $borderRadius;
-      color: $black;
-      cursor: pointer;
-      text-decoration: underline;
-    }
   }
 }
 
@@ -137,7 +105,7 @@
     width: 100%;
   }
 
-  &__flipped__video {
+  &__flipped-video {
     filter: FlipH;
     transform: scaleX(-1);
     -ms-filter: "FlipH";
@@ -211,25 +179,6 @@
 
 .search-panel {
   display: none;
-
-  &__button {
-    background-color: $black;
-    border: none;
-    color: $white;
-    font-size: $text;
-    padding: 10px 0;
-    width: 100%;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: $yellow;
-      border-radius: $borderRadius;
-      color: $black;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
 }
 
 // Desktop Styles (1024px plus)
@@ -253,10 +202,6 @@
 
   .mobile-dialog {
     display: none;
-
-    &__button {
-      display: none;
-    }
   }
 
   .search-panel {
@@ -278,38 +223,6 @@
       padding: 10px 0;
       position: sticky;
       top: 0;
-    }
-
-    // &__label {
-    //   margin-bottom: 5px;
-    // }
-
-    // &__input {
-    //   background-color: $black;
-    //   border: 1px solid $yellow;
-    //   border-radius: $borderRadius;
-    //   color: $white;
-    //   font-size: $text;
-    //   padding: 10px 20px;
-    // }
-
-    &__button {
-      background-color: $black;
-      border: none;
-      color: $white;
-      font-size: $text;
-      padding: 10px 0;
-      width: 100%;
-
-      &:hover,
-      &:focus,
-      &:active {
-        background-color: $yellow;
-        border-radius: $borderRadius;
-        color: $black;
-        cursor: pointer;
-        text-decoration: underline;
-      }
     }
 
     &__empty-list {
