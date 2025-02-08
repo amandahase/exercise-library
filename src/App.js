@@ -21,6 +21,7 @@ function App() {
     .then((exercises) => {
       setFullExerciseList(exercises.data)
       setFilteredExerciseList(exercises.data)
+      console.log(exercises.data)
     }).catch(() => {
       setErrorMessage("Oops!  We had trouble fetching the list of exercises.")
     })
@@ -94,9 +95,24 @@ function App() {
     setIsMobileDialogOpen(!isMobileDialogOpen)
   }
 
+  const addSpaceAfterComma = (text) => {
+    return text.split(',').join(', ')
+  }
+
+  const removeDoublePunctuation = () => {
+    // const regex = "/[,],+/g"
+  
+    return selectedExercise.description.replaceAll("/\.\.$/, '.'", '.')
+  }
+
 // We either want to do a component for each whole panel and break it down further inside those for the different parts
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
+
+// Change css to scss
+// make sure css is cleaned up and only what's needed
+// /([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])\1+/g - str.replace(regex) - double punctuation
+// video.is_flipped?
 
   return (
     <div className="App">
@@ -146,7 +162,7 @@ function App() {
           <section className="details-panel__section">
             <h1 className="details-panel__title">{selectedExercise.name}</h1>
             <div className="details-panel__level">{`Level ${selectedExerciseLevel}`}</div>
-            <p className="details-panel__description">{selectedExercise.description}</p>
+            <p className="details-panel__description">{removeDoublePunctuation()}</p>
             <div className="details-panel__video-wrap">
               <iframe
                 src={selectedExercise.video.url}
@@ -160,13 +176,13 @@ function App() {
               <div className="details-panel__accordion-content">
                 <div className="details-panel__accordion-content-wrap">
                   {selectedExercise.muscle_groups &&
-                    <p><span className="details-panel__bold-text">Muscle Groups:</span> {selectedExercise.muscle_groups}</p>
+                    <p><span className="details-panel__bold-text">Muscle Groups:</span> {addSpaceAfterComma(selectedExercise.muscle_groups)}</p>
                   }
                   {selectedExercise.equipment_required &&
-                    <p><span className="details-panel__bold-text">Equipment Required:</span> {selectedExercise.equipment_required}</p>
+                    <p><span className="details-panel__bold-text">Equipment Required:</span> {addSpaceAfterComma(selectedExercise.equipment_required)}</p>
                   }
                   {selectedExercise.movement_patterns &&
-                    <p><span className="details-panel__bold-text">Movement Patterns:</span> {selectedExercise.movement_patterns}</p>
+                    <p><span className="details-panel__bold-text">Movement Patterns:</span> {addSpaceAfterComma(selectedExercise.movement_patterns)}</p>
                   }
                   {selectedExercise.synonyms &&
                     <p><span className="details-panel__bold-text">Synonyms:</span> {selectedExercise.synonyms}</p>
