@@ -1,0 +1,28 @@
+@import '../Variables.scss';
+
+.button {
+  background-color: $black;
+  border: none;
+  color: $white;
+  font-size: $text;
+  padding: 10px 0;
+  width: 100%;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $yellow;
+    border-radius: $borderRadius;
+    color: $black;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .button {
+    &__hidden {
+      display: none;
+    }
+  }
+}

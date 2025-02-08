@@ -7,6 +7,7 @@ import axios from 'axios';
 // import DetailsPanel from "./Components/DetailsPanel"
 import TextDetails from "./Components/TextDetails"
 import SearchInput from "./Components/SearchInput"
+import Button from "./Components/Button"
 
 function App() {
   const [fullExerciseList, setFullExerciseList] = useState([])
@@ -83,7 +84,11 @@ function App() {
       return (
         filteredExerciseList.map((exercise) => (
           <li key={exercise.id} className="search-panel__list-item">
-            <button onClick={() => handleExerciseSelection(exercise)} className="search-panel__button">{exercise.name}</button>
+            <Button 
+              text={exercise.name}
+              onClick={() => handleExerciseSelection(exercise)}
+              mobileOnly={false}
+            />
           </li>
         )))
     } else {
@@ -113,7 +118,11 @@ function App() {
 
   return (
     <div className="App">
-      <button className="mobile-dialog__button" onClick={handleToggleMobileSearch}>Find an Exercise</button>
+      <Button 
+        text="Find an Exercise"
+        onClick={handleToggleMobileSearch}
+        mobileOnly={true}
+      />
       <dialog className="mobile-dialog" open={isMobileDialogOpen}>
         <nav className="mobile-dialog__menu">
           <div className="mobile-dialog__search">
