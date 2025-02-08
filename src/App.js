@@ -90,8 +90,8 @@ function App() {
     }
   }
 
-  const handleOpenMobileSearch = () => {
-    setIsMobileDialogOpen(true)
+  const handleToggleMobileSearch = () => {
+    setIsMobileDialogOpen(!isMobileDialogOpen)
   }
 
 // We either want to do a component for each whole panel and break it down further inside those for the different parts
@@ -100,10 +100,13 @@ function App() {
 
   return (
     <div className="App">
-      <button className="mobile-dialog__button" onClick={handleOpenMobileSearch}>Find an Exercise</button>
+      <button className="mobile-dialog__button" onClick={handleToggleMobileSearch}>Find an Exercise</button>
       <dialog className="mobile-dialog" open={isMobileDialogOpen}>
         <nav className="mobile-dialog__menu">
           <div className="mobile-dialog__search">
+            <div className="mobile-dialog__close-wrap">
+              <button className="mobile-dialog__close" onClick={handleToggleMobileSearch}><span className="sr-only">Close</span></button>
+            </div>
             <label htmlFor="search_exercises" className="mobile-dialog__label">Search Exercises</label>
             <input
               type="search"

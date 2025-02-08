@@ -1,3 +1,13 @@
+.sr-only {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
+}
+
 .App {
   padding: 20px;
   display: flex;
@@ -7,6 +17,48 @@
   height: 100vh;
 }
 
+.mobile-dialog {
+  background-color: #010703;
+  width: 80%;
+  max-width: 550px;
+  z-index: 2;
+  border: 1px solid #ffee5c;
+  height: 90%;
+  overflow: auto;
+  padding: 0 10px 10px 10px;
+}
+
+.mobile-dialog__close-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobile-dialog__close {
+  position: relative;
+  padding: 10px;
+  background-color: #010703;
+  border: none;
+}
+
+.mobile-dialog__close::before,
+.mobile-dialog__close::after {
+  position: absolute;
+  left: 9px;
+  content: ' ';
+  height: 20px;
+  width: 2px;
+  background-color: #ffee5c;
+  top: 0;
+}
+
+.mobile-dialog__close::before {
+  transform: rotate(45deg);
+}
+.mobile-dialog__close::after {
+  transform: rotate(-45deg);
+}
+
+.search-panel__search,
 .mobile-dialog__search {
   display: flex;
   flex-direction: column;
@@ -17,10 +69,12 @@
   padding: 10px 0;
 }
 
+.search-panel__label,
 .mobile-dialog__label {
   margin-bottom: 5px;
 }
 
+.search-panel__input,
 .mobile-dialog__input {
   padding: 10px 20px;
   background-color: #010703;
@@ -176,6 +230,7 @@
     overflow-y: auto;
     height: 100%;
     padding-right: 15px;
+    display: block;
   }
 
   .search-panel__list {
