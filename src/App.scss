@@ -1,0 +1,357 @@
+// Variables
+
+// Colors
+$black: #010703;
+$yellow: #FFEE5C;
+$white: #FFF;
+
+// Text
+$title: 2rem;
+$smallText: 0.875rem;
+$text: 1rem;
+$largeText: 1.5rem;
+
+// Layout/Styling
+$borderRadius: 10px;
+
+// Screenreader class - hide content, but make it still available to screenreaders
+.sr-only {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap; 
+}
+
+// Mobile/Tablet Styles (up to 1024px)
+.App {
+  background-color: $black;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.mobile-dialog {
+  background-color: $black;
+  border: 1px solid $yellow;
+  border-radius: $borderRadius;
+  height: 90%;
+  max-width: 550px;
+  overflow: auto;
+  padding: 0 10px 10px 10px;
+  width: 80%;
+  z-index: 2;
+
+  &__close-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__close {
+    background-color: $black;
+    border: none;
+    padding: 10px;
+    position: relative;
+
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: pointer;
+    }
+
+    &::after,
+    &::before {
+      background-color: $yellow;
+      content: ' ';
+      height: 20px;
+      left: 9px;
+      position: absolute;
+      top: 0;
+      width: 2px;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__search {
+    background-color: $black;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+  }
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    background-color: $black;
+    border: 1px solid $yellow;
+    border-radius: $borderRadius;
+    color: $white;
+    font-size: $text;
+    padding: 10px 20px;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  &__button {
+    background-color: $black;
+    border: none;
+    color: $white;
+    font-size: $text;
+    padding: 10px 0;
+    width: 100%;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $yellow;
+      border-radius: $borderRadius;
+      color: $black;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.details-panel {
+  &__video-wrap {
+    margin: 20px 0;
+    padding-top: 56.25%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  &__video {
+    border: none;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  &__flipped__video {
+    filter: FlipH;
+    transform: scaleX(-1);
+    -ms-filter: "FlipH";
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+  }
+
+  &__level {
+    background-color: $yellow;
+    border-radius: $borderRadius;
+    color: $black;
+    font-size: $smallText;
+    padding: 5px 10px;
+    width: fit-content;
+  }
+
+  &__title {
+    font-size: $title;
+  }
+
+  &__description {
+    font-size: $text;
+  }
+
+  &__accordion {
+    background-color: $yellow;
+    border-radius: $borderRadius;
+    color: $black;
+    padding-bottom: 5px;
+    width: 100%;
+  }
+
+  &__accordion-summary {
+    border-radius: $borderRadius;
+    list-style-position: outside;
+    margin-left: 30px;
+    padding: 10px 10px 10px 20px;
+
+    &:hover,
+    &:active,
+    &:focus {
+      cursor: pointer;
+    }
+  }
+
+  &__accordion-content-wrap {
+    padding: 10px;
+  }
+
+  &__accordion-content {
+    background-color: $black;
+    border-radius: $borderRadius;
+    color: $white;
+    margin: 5px;
+  }
+
+  &__bold-text {
+    font-weight: 700;
+  }
+
+  &__empty-text {
+    font-size: $text;
+  }
+}
+
+.error-alert {
+  background-color: $yellow;
+  border-radius: $borderRadius;
+  color: $black;
+  font-size: $text;
+  padding: 10px 20px;
+  width: fit-content;
+}
+
+.search-panel {
+  display: none;
+
+  &__button {
+    background-color: $black;
+    border: none;
+    color: $white;
+    font-size: $text;
+    padding: 10px 0;
+    width: 100%;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $yellow;
+      border-radius: $borderRadius;
+      color: $black;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Desktop Styles (1024px plus)
+@media screen and (min-width: 1024px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .App {
+    flex-direction: row;
+    height: 100%;
+    margin: 0;
+  }
+
+  .mobile-dialog {
+    display: none;
+
+    &__button {
+      display: none;
+    }
+  }
+
+  .search-panel {
+    display: unset;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 15px;
+    width: 20%;
+
+    &__list {
+      padding: 0 0 20px 0;
+    }
+
+    &__search {
+      background-color: $black;
+      color: $white;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+    }
+
+    &__label {
+      margin-bottom: 5px;
+    }
+
+    &__input {
+      background-color: $black;
+      border: 1px solid $yellow;
+      border-radius: $borderRadius;
+      color: $white;
+      font-size: $text;
+      padding: 10px 20px;
+    }
+
+    &__button {
+      background-color: $black;
+      border: none;
+      color: $white;
+      font-size: $text;
+      padding: 10px 0;
+      width: 100%;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $yellow;
+        border-radius: $borderRadius;
+        color: $black;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    &__empty-list {
+      font-size: $text;
+      text-align: center;
+    }
+  }
+
+  .details-panel {
+    height: 100%;
+    padding: 0 20px 20px 20px;
+    overflow-y: auto;
+    width: 80%;
+
+    &__video-wrap {
+      margin: 30px 0;
+    }
+
+    &__accordion {
+      margin-bottom: 50px;
+    }
+
+    &__empty-text {
+      font-size: $largeText;
+    }
+  }
+}
