@@ -163,12 +163,11 @@ function App() {
             <div className="details-panel__level">{`Level ${selectedExerciseLevel}`}</div>
             <p className="details-panel__description">{removeDoublePunctuation()}</p>
             <div className="details-panel__video-wrap">
-              <iframe
-                src={selectedExercise.video.url}
-                referrerPolicy="strict-origin-when-cross-origin"
-                title={`${selectedExercise.name} Video`}
-                className={`${selectedExercise.video.is_flipped ? "details-panel__flipped-video" : ""} details-panel__video`}
-              />
+              <video className={`${selectedExercise.video.is_flipped ? "details-panel__flipped-video" : ""} details-panel__video`} src={selectedExercise.video.url} autoPlay muted loop>
+                <source src={selectedExercise.video.url} type="video/mp4" />
+                <source src={selectedExercise.video.url} type="video/ogg" />
+                Your browser does not support the video tag.
+              </video>
             </div>
             <details className="details-panel__accordion">
               <summary className="details-panel__accordion-summary">More Details for {selectedExercise.name}</summary>
