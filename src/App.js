@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './App.css';
+import './App.scss';
 
 import axios from 'axios';
 
@@ -100,17 +100,16 @@ function App() {
   }
 
   const removeDoublePunctuation = () => {
-    // const regex = "/[,],+/g"
+    // const regex = "/[,],+/g" str.replace(/Welcome/gi, 'Hello')
   
-    return selectedExercise.description.replaceAll("/\.\.$/, '.'", '.')
+    return selectedExercise.description.replace(/\.\.+/g, '.').replace(/\,\,+/g, ',')
   }
 
 // We either want to do a component for each whole panel and break it down further inside those for the different parts
 // OR we want to keep the skeleton of each panel in here and then just have components for the various parts inside them
 // like the video, search input, list, accordion/modal, chip, etc.
 
-// Change css to scss
-// make sure css is cleaned up and only what's needed
+// Add separate components
 // /([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])\1+/g - str.replace(regex) - double punctuation
 
   return (
