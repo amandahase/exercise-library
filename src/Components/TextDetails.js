@@ -1,9 +1,7 @@
-import "./TextDetails.scss";
-
 function TextDetails(props) {
   return (
     <p>
-      <span className="details-panel__bold-text">{`${props.category}: `}</span>
+      <strong>{`${props.category}: `}</strong>
       {props.value}
     </p>
   );
