@@ -1,78 +1,78 @@
-import React, {useEffect, useState} from "react";
-import './App.scss';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import "./App.scss";
+import axios from "axios";
 
-import TextDetails from "./Components/TextDetails"
-import SearchInput from "./Components/SearchInput"
-import Button from "./Components/Button"
+import TextDetails from "./Components/TextDetails";
+import SearchInput from "./Components/SearchInput";
+import Button from "./Components/Button";
 
 function App() {
-  const [fullExerciseList, setFullExerciseList] = useState([])
-  const [filteredExerciseList, setFilteredExerciseList] = useState([])
-  const [searchValue, setSearchValue] = useState("")
-  const [selectedExercise, setSelectedExercise] = useState({})
-  const [isExerciseSelected, setIsExerciseSelected] = useState(false)
-  const [selectedExerciseLevel, setSelectedExerciseLevel] = useState(null)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [isMobileDialogOpen, setIsMobileDialogOpen] = useState(false)
+  const [fullExerciseList, setFullExerciseList] = useState([]);
+  const [filteredExerciseList, setFilteredExerciseList] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedExercise, setSelectedExercise] = useState({});
+  const [isExerciseSelected, setIsExerciseSelected] = useState(false);
+  const [selectedExerciseLevel, setSelectedExerciseLevel] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isMobileDialogOpen, setIsMobileDialogOpen] = useState(false);
 
   const getExerciseList = () => {
-    axios.get('https://candidate.staging.future.co/sandbox/api/exercises')
+    axios.get("https://candidate.staging.future.co/sandbox/api/exercises")
     .then((exercises) => {
-      setFullExerciseList(exercises.data)
-      setFilteredExerciseList(exercises.data)
+      setFullExerciseList(exercises.data);
+      setFilteredExerciseList(exercises.data);
     }).catch(() => {
-      setErrorMessage("Oops!  We had trouble fetching the list of exercises.")
-    })
-  }
+      setErrorMessage("Oops!  We had trouble fetching the list of exercises.");
+    });
+  };
 
   const getExerciseLevel = () => {
     axios.get(`https://candidate.staging.future.co/sandbox/api/exercises/${selectedExercise.id}/predictions`)
     .then((prediction) => {
-      setSelectedExerciseLevel(prediction.data.skill_level.level)
+      setSelectedExerciseLevel(prediction.data.skill_level.level);
     }).catch(() => {
-      setErrorMessage("Oops!  We had trouble fetching the predicted level for this exercise.")
-    })
-  }
+      setErrorMessage("Oops!  We had trouble fetching the predicted level for this exercise.");
+    });
+  };
 
   useEffect(() => {
-    getExerciseList()
-  }, [])
+    getExerciseList();
+  }, []);
 
   useEffect(() => {
     if (Object.keys(selectedExercise).length !== 0) {
-      getExerciseLevel()
-      setIsExerciseSelected(true)
+      getExerciseLevel();
+      setIsExerciseSelected(true);
     } else {
-      setIsExerciseSelected(false)
+      setIsExerciseSelected(false);
     }
-  }, [selectedExercise])
+  }, [selectedExercise]);
 
   useEffect(() => {
-    const searchedList = fullExerciseList.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "")
+    const searchedList = fullExerciseList.filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "");
 
-    setFilteredExerciseList(searchedList)
-  }, [searchValue])
+    setFilteredExerciseList(searchedList);
+  }, [searchValue]);
 
   const handleSearchFieldChange = (e) => {
-    setSearchValue(e.target.value)
-  }
+    setSearchValue(e.target.value);
+  };
 
   const handleExerciseSelection = (exercise) => {
-    setSelectedExercise(exercise)
-    setIsMobileDialogOpen(false)
-  }
+    setSelectedExercise(exercise);
+    setIsMobileDialogOpen(false);
+  };
 
   const removeSnakeCase = (text) => {
-    const removeUnderscore = text.split("_")
-    const capitalizeAndAddSpace = removeUnderscore.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(" ")
+    const removeUnderscore = text.split("_");
+    const capitalizeAndAddSpace = removeUnderscore.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(" ");
 
-    return capitalizeAndAddSpace
-  }
+    return capitalizeAndAddSpace;
+  };
 
   const displayIsAlternatingInfo = () => {
-    return selectedExercise.is_alternating === true ? "Yes" : "No"
-  }
+    return selectedExercise.is_alternating === true ? "Yes" : "No";
+  };
 
   const displayExerciseListItems = () => {
     if (filteredExerciseList.length > 0) {
@@ -85,25 +85,25 @@ function App() {
               mobileOnly={false}
             />
           </li>
-        )))
+        )));
     } else {
       return (
         <p className="search-panel__empty-list">No exercise matches</p>
-      )
+      );
     }
-  }
+  };
 
   const handleToggleMobileSearch = () => {
-    setIsMobileDialogOpen(!isMobileDialogOpen)
-  }
+    setIsMobileDialogOpen(!isMobileDialogOpen);
+  };
 
   const addSpaceAfterComma = (text) => {
-    return text.split(',').join(', ')
-  }
+    return text.split(",").join(", ");
+  };
 
   const removeDoublePunctuation = () => {
-    return selectedExercise.description.replace(/\.\.+/g, '.').replace(/\,\,+/g, ',')
-  }
+    return selectedExercise.description.replace(/\.\.+/g, ".").replace(/\,\,+/g, ",");
+  };
 
   return (
     <div className="App">
@@ -116,7 +116,12 @@ function App() {
         <nav className="mobile-dialog__menu">
           <div className="mobile-dialog__search">
             <div className="mobile-dialog__close-wrap">
-              <button className="mobile-dialog__close" onClick={handleToggleMobileSearch}><span className="sr-only">Close</span></button>
+              <button
+                className="mobile-dialog__close"
+                onClick={handleToggleMobileSearch}
+              >
+                <span className="sr-only">Close</span>
+              </button>
             </div>
             <SearchInput
               id="search_exercises"
@@ -216,6 +221,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;

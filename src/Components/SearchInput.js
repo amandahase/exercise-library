@@ -1,4 +1,4 @@
-import './SearchInput.scss';
+import "./SearchInput.scss";
 
 function SearchInput(props) {
   return (
@@ -14,6 +14,6 @@ function SearchInput(props) {
       />
     </>
   );
-}
+};
 
 export default SearchInput;

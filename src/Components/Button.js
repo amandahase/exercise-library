@@ -1,4 +1,4 @@
-import './Button.scss';
+import "./Button.scss";
 
 function Button(props) {
   return (
@@ -9,6 +9,6 @@ function Button(props) {
       {props.text}
     </button>
   );
-}
+};
 
 export default Button;

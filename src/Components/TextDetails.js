@@ -1,4 +1,4 @@
-import './TextDetails.scss';
+import "./TextDetails.scss";
 
 function TextDetails(props) {
   return (
@@ -7,6 +7,6 @@ function TextDetails(props) {
       {props.value}
     </p>
   );
-}
+};
 
 export default TextDetails;
